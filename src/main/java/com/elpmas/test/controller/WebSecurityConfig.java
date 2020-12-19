@@ -1,10 +1,17 @@
 package com.elpmas.test.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.elpmas.test.domain.service.UserDetailsServiceImpl;
 
 /**
  * SpringSecurityを利用するための設定クラス
@@ -14,9 +21,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
     /**
      * 認可設定を無視するリクエストを設定
-     * 静的リソース(image,javascript,css)を認可処理の対象から除外する
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -26,8 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 認証・認可の情報を設定する
-     * 画面遷移のURL・パラメータを取得するname属性の値を設定
-     * SpringSecurityのconfigureメソッドをオーバーライドしています。
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,10 +48,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             	.antMatchers("/login").permitAll()
                 .anyRequest().authenticated();
-
         http
         	.formLogin()
-                .defaultSuccessUrl("/sample", true);
+        		.loginPage("/login")
+        		.usernameParameter("username")
+				.passwordParameter("password")
+                .defaultSuccessUrl("/sample", true)
+                .failureUrl("/eroor").permitAll();
     }
 
+    /**
+     * 認証時に利用するデータソースを定義する設定メソッド
+     * ここではDBから取得したユーザ情報をuserDetailsServiceへセットすることで認証時の比較情報としている
+     */
+    @Autowired
+    public void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 }
