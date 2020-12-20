@@ -16,6 +16,18 @@ import lombok.Setter;
 @Table(name="book_sample")
 public class BookEntity {
 
+	public BookEntity(int id, String title, String summary, String classification, int delflg) {
+		this.id=id;
+		this.title=title;
+		this.summary=summary;
+		this.classification=classification;
+		this.delflg=delflg;
+	}
+
+	public BookEntity() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

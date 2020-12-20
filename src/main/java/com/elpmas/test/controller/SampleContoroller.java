@@ -33,6 +33,9 @@ public class SampleContoroller {
 		model.addAttribute("book",jdbcTestRepository.findBookById(1));
 
 		model.addAttribute("bookList",jdbcTestRepository.findBooksByDelflg(0));
+		model.addAttribute("title1",jdbcTestRepository.findTitleByIdNameParam1(1));
+		model.addAttribute("title2",jdbcTestRepository.findTitleByIdNameParam2(1,0));
+		model.addAttribute("title3",jdbcTestRepository.findTitleByIdNameParam3(1,0));
 
         return "sample";
     }
