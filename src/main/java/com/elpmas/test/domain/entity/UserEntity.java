@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="user_sample")
-public class User implements UserDetails{
+public class UserEntity implements UserDetails{
 
 	@Id
 	@Column(name="id")

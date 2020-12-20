@@ -1,1 +1,6 @@
-ログイン完了
+<div th:each="book:${bookAll}" >
+	<div th:text="'ID:'+${book.id}"></div>
+	<div th:text="'タイトル:'+${book.title}"></div>
+	<div th:text="'概要:'+${book.summary}"></div>
+	<div th:text="'分類:'+${book.classification}"></div>
+</div>
