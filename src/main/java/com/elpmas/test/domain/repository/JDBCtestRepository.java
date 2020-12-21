@@ -109,4 +109,66 @@ public class JDBCtestRepository {
 		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(bookentity);
 		return namedParameterJdbcTemplate.queryForObject(sql,map,String.class);//第三引数でパラメータを指定
 	}
+
+	public Boolean InsertBook(int delflg){
+
+		Boolean successFlg = false;
+
+		String sql ="INSERT \r\n"
+				+ "INTO book_sample \r\n"
+				+ "VALUES ( \r\n"
+				+ "    5\r\n"
+				+ "    , 'わかばちゃんと学ぶ Git使い方入門'\r\n"
+				+ "    , '本書は、マンガと実践で学ぶGitの入門書です。Gitの概念はもちろん、GitHubやBitbucketについても丁寧に解説しています。これからGitを使い始める人にオススメの1冊です。'\r\n"
+				+ "    ,'技術書'\r\n"
+				+ "    ,:delflg\r\n"//バインドパラメータは:カラム名で指定
+				+ ");";
+		Map<String,Object> params =new HashMap<String,Object>();
+		params.put("delflg", delflg); //カラム名とパラメータをセット
+		int updateCount = namedParameterJdbcTemplate.update(sql,params); //戻り値は更新対象レコード数
+		if(updateCount>0)//0の時は更新が上手くいかなかったと判断できる
+		{
+			successFlg=true;
+		}
+		return successFlg;
+	}
+
+	public Boolean UpdateBook(int id,int delflg){
+
+		Boolean successFlg = false;
+
+		String sql ="UPDATE book_sample\r\n"
+				+ "SET delflg=:delflg\r\n"
+				+ "WHERE id=:id;";
+		MapSqlParameterSource map = new MapSqlParameterSource()
+				.addValue("id",id)
+				.addValue("delflg", delflg);
+
+		int updateCount = namedParameterJdbcTemplate.update(sql,map); //戻り値は更新対象レコード数
+		if(updateCount>0)//0の時は更新が上手くいかなかったと判断できる
+		{
+			successFlg=true;
+		}
+		return successFlg;
+	}
+
+	public Boolean DeleteBook(int id,int delflg){
+
+		Boolean successFlg = false;
+
+		String sql ="DELETE FROM book_sample \r\n"
+				+ "WHERE\r\n"
+				+ "    id = :id \r\n"
+				+ "    AND delflg = :delflg;"; //バインドパラメータは:カラム名で指定
+		MapSqlParameterSource map = new MapSqlParameterSource()
+				.addValue("id",id)
+				.addValue("delflg", delflg);
+
+		int updateCount = namedParameterJdbcTemplate.update(sql,map); //戻り値は更新対象レコード数
+		if(updateCount>0)//0の時は更新が上手くいかなかったと判断できる
+		{
+			successFlg=true;
+		}
+		return successFlg;
+	}
 }
