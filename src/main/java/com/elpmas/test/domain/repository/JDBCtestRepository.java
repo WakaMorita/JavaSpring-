@@ -171,4 +171,19 @@ public class JDBCtestRepository {
 		}
 		return successFlg;
 	}
+
+	//////////////////RowMapperを使用した実装//////////////////
+	public BookEntity GetBookById(int id) {
+		String sql ="SELECT * FROM book_sample where id =?"; //バインドパラメータは:カラム名で指定
+		BookRowMapper rowMapper = new BookRowMapper();
+		return jdbctemplate.queryForObject(sql, rowMapper,id); //指定のEntityへの変換をrowMapperが自動で行う。
+	}
+
+	public List<BookEntity> GetAllBook()
+	{
+		String sql ="SELECT * FROM book_sample";
+		BookRowMapper rowMapper = new BookRowMapper();
+		return jdbctemplate.query(sql, rowMapper); //指定のEntityへの変換をrowMapperが自動で行う。
+	}
+///////////////////////////////////////////////////////////////
 }

@@ -1,32 +1,40 @@
+<!-- <div th:if="${bookAll ne null}" th:each="book:${bookAll}" > -->
+<!-- 	<div th:text="'ID:'+${book.id}"></div> -->
+<!-- 	<div th:text="'タイトル:'+${book.title}"></div> -->
+<!-- 	<div th:text="'概要:'+${book.summary}"></div> -->
+<!-- 	<div th:text="'分類:'+${book.classification}"></div> -->
+<!-- </div> -->
+<!-- <div th:if="${id ne null}" th:text="'IDのMax値は'+${id}" ></div> -->
+<!-- <div th:if="${titleAll ne null}" th:text="'titleAllは'+${titleAll}" ></div> -->
+<!-- <div th:if="${titleNotDel ne null}" th:text="'titleNotDelは'+${titleNotDel}" ></div> -->
+<!-- <div th:if="${book ne null}"> -->
+<!-- 	<div th:text="Map取得"></div> -->
+<!-- 	<div th:text="'ID:'+${book.id}"></div> -->
+<!-- 	<div th:text="'タイトル:'+${book.title}"></div> -->
+<!-- 	<div th:text="'概要:'+${book.summary}"></div> -->
+<!-- 	<div th:text="'分類:'+${book.classification}"></div> -->
+<!-- </div> -->
+
+<!-- <div th:if="${bookAll ne null}" th:each="book:${bookList}" > -->
+<!-- 	<div th:text="List取得"></div> -->
+<!-- 	<div th:text="'ID:'+${book.id}"></div> -->
+<!-- 	<div th:text="'タイトル:'+${book.title}"></div> -->
+<!-- 	<div th:text="'概要:'+${book.summary}"></div> -->
+<!-- 	<div th:text="'分類:'+${book.classification}"></div> -->
+<!-- </div> -->
+
+<!-- <div th:if="${title1 ne null}" th:text="'title1は'+${title1}" ></div> -->
+<!-- <div th:if="${title2 ne null}" th:text="'title2は'+${title2}" ></div> -->
+<!-- <div th:if="${title3 ne null}" th:text="'title3は'+${title3}" ></div> -->
+
+<!-- <div th:if="${insert ne null}" th:text="'insertは'+${insert}" ></div> -->
+<!-- <div th:if="${update ne null}" th:text="'updateは'+${update}" ></div> -->
+<!-- <div th:if="${delete ne null}" th:text="'deleteは'+${delete}" ></div> -->
+
+<div th:if="${title ne null}" th:text="'titleは'+${title}" ></div>
 <div th:if="${bookAll ne null}" th:each="book:${bookAll}" >
 	<div th:text="'ID:'+${book.id}"></div>
 	<div th:text="'タイトル:'+${book.title}"></div>
 	<div th:text="'概要:'+${book.summary}"></div>
 	<div th:text="'分類:'+${book.classification}"></div>
 </div>
-<div th:if="${id ne null}" th:text="'IDのMax値は'+${id}" ></div>
-<div th:if="${titleAll ne null}" th:text="'titleAllは'+${titleAll}" ></div>
-<div th:if="${titleNotDel ne null}" th:text="'titleNotDelは'+${titleNotDel}" ></div>
-<div th:if="${book ne null}">
-	<div th:text="Map取得"></div>
-	<div th:text="'ID:'+${book.id}"></div>
-	<div th:text="'タイトル:'+${book.title}"></div>
-	<div th:text="'概要:'+${book.summary}"></div>
-	<div th:text="'分類:'+${book.classification}"></div>
-</div>
-
-<div th:if="${bookAll ne null}" th:each="book:${bookList}" >
-	<div th:text="List取得"></div>
-	<div th:text="'ID:'+${book.id}"></div>
-	<div th:text="'タイトル:'+${book.title}"></div>
-	<div th:text="'概要:'+${book.summary}"></div>
-	<div th:text="'分類:'+${book.classification}"></div>
-</div>
-
-<div th:if="${title1 ne null}" th:text="'title1は'+${title1}" ></div>
-<div th:if="${title2 ne null}" th:text="'title2は'+${title2}" ></div>
-<div th:if="${title3 ne null}" th:text="'title3は'+${title3}" ></div>
-
-<div th:if="${insert ne null}" th:text="'insertは'+${insert}" ></div>
-<div th:if="${update ne null}" th:text="'updateは'+${update}" ></div>
-<div th:if="${delete ne null}" th:text="'deleteは'+${delete}" ></div>
